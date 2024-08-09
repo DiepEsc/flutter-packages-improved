@@ -91,7 +91,11 @@ public class WebViewClientHostApiImpl implements GeneratedAndroidWebView.WebView
 
       // The client is only allowed to stop navigations that target the main frame because
       // overridden URLs are passed to `loadUrl` and `loadUrl` cannot load a subframe.
-      return request.isForMainFrame() && returnValueForShouldOverrideUrlLoading;
+      // ====== IMPORTANT!!! ======
+      // The client shhould be allowed to stop navigations on both mainframe and subframe.
+      // `loadUrl` cannot load a subframe doesn't mean it should continue the navigation.
+      // ==========================
+      return returnValueForShouldOverrideUrlLoading;
     }
 
     // Legacy codepath for < 24; newer versions use the variant above.
@@ -193,7 +197,11 @@ public class WebViewClientHostApiImpl implements GeneratedAndroidWebView.WebView
 
       // The client is only allowed to stop navigations that target the main frame because
       // overridden URLs are passed to `loadUrl` and `loadUrl` cannot load a subframe.
-      return request.isForMainFrame() && returnValueForShouldOverrideUrlLoading;
+      // ====== IMPORTANT!!! ======
+      // The client shhould be allowed to stop navigations on both mainframe and subframe.
+      // `loadUrl` cannot load a subframe doesn't mean it should continue the navigation.
+      // ==========================
+      return returnValueForShouldOverrideUrlLoading;
     }
 
     // Legacy codepath for < Lollipop; newer versions use the variant above.
