@@ -1466,8 +1466,10 @@ class AndroidNavigationDelegate extends PlatformNavigationDelegate {
 
     // The client is only allowed to stop navigations that target the main frame because
     // overridden URLs are passed to `loadUrl` and `loadUrl` cannot load a subframe.
-    if (!isForMainFrame ||
-        onNavigationRequest == null ||
+    // ==================== IMPORTANT!!! ==================
+    // `loadUrl` cannot load a subframe doesn't mean we can't stop the navigation.
+    // ====================================================
+    if (onNavigationRequest == null ||
         onLoadRequest == null) {
       return;
     }
